@@ -20,6 +20,9 @@ public class Employee {
     @OneToOne(mappedBy = "employee")
     private EmployeeAuth auth;
 
+    @OneToOne(mappedBy = "employee")
+    private Payment payment;
+
     public Employee(String firstName, String lastName, Double salary) {
         this.firstName = firstName;
         this.lastName = lastName;

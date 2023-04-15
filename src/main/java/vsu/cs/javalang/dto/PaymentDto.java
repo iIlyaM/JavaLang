@@ -1,34 +1,13 @@
-package vsu.cs.javalang.entity;
+package vsu.cs.javalang.dto;
 
-import jakarta.persistence.*;
+import lombok.Data;
 
-@Entity
-@Table(name="payment")
-public class Payment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "integer_id")
-    private Integer id;
+@Data
+public class PaymentDto {
 
     private Integer clientCardNumber;
-
     private Double amount;
-
     private Double sum;
-
-    @OneToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-
-    public Payment(Integer clientCardNumber, Double amount, Double sum) {
-        this.clientCardNumber = clientCardNumber;
-        this.amount = amount;
-        this.sum = sum;
-    }
-
-    public Payment() {
-    }
 
     public Integer getClientCardNumber() {
         return clientCardNumber;
