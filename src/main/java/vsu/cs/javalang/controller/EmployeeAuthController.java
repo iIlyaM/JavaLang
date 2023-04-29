@@ -1,8 +1,8 @@
 package vsu.cs.javalang.controller;
 
 import org.springframework.web.bind.annotation.*;
+import vsu.cs.javalang.dto.DisplayAuthDto;
 import vsu.cs.javalang.dto.EmployeeAuthDto;
-import vsu.cs.javalang.entity.EmployeeAuth;
 import vsu.cs.javalang.service.EmployeeAuthService;
 
 import java.util.List;
@@ -21,12 +21,12 @@ public class EmployeeAuthController {
     }
 
     @GetMapping("/employee/auth/{id}")
-    public EmployeeAuthDto get(@PathVariable Integer id) {
+    public DisplayAuthDto get(@PathVariable Integer id) {
         return authService.findById(id);
     }
 
     @GetMapping("/employee/auths")
-    public List<EmployeeAuthDto> getAll() {
+    public List<DisplayAuthDto> getAll() {
         return authService.findAll();
     }
 

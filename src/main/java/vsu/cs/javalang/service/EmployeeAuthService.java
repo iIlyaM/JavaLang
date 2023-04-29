@@ -1,6 +1,8 @@
 package vsu.cs.javalang.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import vsu.cs.javalang.dto.DisplayAuthDto;
 import vsu.cs.javalang.dto.EmployeeAuthDto;
 import vsu.cs.javalang.entity.EmployeeAuth;
 import vsu.cs.javalang.mapper.EmployeeAuthMapper;
@@ -21,19 +23,24 @@ public class EmployeeAuthService {
     }
 
     public void addAuth(EmployeeAuthDto auth) {
-        employeeAuthRepository.save(employeeAuthMapper.toEntity(auth));
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+        EmployeeAuth employeeAuth = new EmployeeAuth();
+        employeeAuth.setEmail(auth.getEmail());
+        employeeAuth.setPassword(bc.encode(auth.getPassword()));
+        employeeAuth.setUserName(auth.getUserName());
+        employeeAuthRepository.save(employeeAuth);
     }
 
-    public EmployeeAuthDto findById(Integer id) {
+    public DisplayAuthDto findById(Integer id) {
         Optional<EmployeeAuth> employeeAuth  = employeeAuthRepository.findAll()
                 .stream().filter(val -> val.getId().equals(id))
                 .findFirst();
-        return employeeAuthMapper.fromEntity(employeeAuth.orElseGet(employeeAuth::orElseThrow));
+        return employeeAuthMapper.toDisplayDto(employeeAuth.orElseGet(employeeAuth::orElseThrow));
     }
 
-    public List<EmployeeAuthDto> findAll() {
+    public List<DisplayAuthDto> findAll() {
         return employeeAuthRepository.findAll()
-                .stream().map(employeeAuthMapper::fromEntity)
+                .stream().map(employeeAuthMapper::toDisplayDto)
                 .collect(Collectors.toList());
     }
 

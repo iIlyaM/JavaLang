@@ -1,31 +1,16 @@
-package vsu.cs.javalang.entity;
+package vsu.cs.javalang.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ManyToMany;
+import lombok.Data;
+import vsu.cs.javalang.entity.Fuel;
 
 import java.util.List;
 
-
-@Entity
-@Table(name="filling_machine")
-public class FillingMachine {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+public class DisplayFillingMachineDto {
     private Integer id;
     private Double counter;
-
-    @ManyToMany
     private List<Fuel> tanks;
-
-    public FillingMachine(Integer id, Double counter) {
-        this.id = id;
-        this.counter = counter;
-    }
-
-
-    public FillingMachine() {
-
-    }
 
     public Integer getId() {
         return id;

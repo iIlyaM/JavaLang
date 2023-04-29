@@ -1,12 +1,21 @@
 package vsu.cs.javalang.dto;
 
 import lombok.Data;
+
 @Data
-public class EmployeeDto {
+public class DisplayEmployeeDto {
+    private Integer id;
     private String firstName;
     private String lastName;
     private Double salary;
-    private DisplayAuthDto displayAuthDto;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -30,13 +39,5 @@ public class EmployeeDto {
 
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-
-    public DisplayAuthDto getDisplayAuthDto() {
-        return displayAuthDto;
-    }
-
-    public void setDisplayAuthDto(DisplayAuthDto displayAuthDto) {
-        this.displayAuthDto = displayAuthDto;
     }
 }

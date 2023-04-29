@@ -16,7 +16,7 @@ public class EmployeeAuth {
     private String userName;
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
